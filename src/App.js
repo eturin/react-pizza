@@ -1,9 +1,10 @@
 import React from 'react';
 
 
-import PizzaBlock from "./PizzaBlock";
+import PizzaBlock from "./components/PizzaBlock";
 
-import Header from "./Header/Header";
+import Header from "./components/Header/Header";
+import Categories from "./components/Categories";
 
 let App = ()=> {
     const path = "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/"
@@ -20,6 +21,12 @@ let App = ()=> {
     ]
 
     const mPizza = mCatalog.map(x => (<PizzaBlock key={x.id} {...x} />))
+    const mCategories = [{id:1,name:"Все"},
+                         {id:2,name:"Мясные"},
+                         {id:3,name:"Вегетарианская"},
+                         {id:4,name:"Гриль"},
+                         {id:5,name:"Острые"},
+                         {id:6,name:"Закрытые",active:true}]
 
     return (
         <div className="wrapper">
@@ -27,16 +34,7 @@ let App = ()=> {
             <div className="content">
                 <div className="container">
                     <div className="content__top">
-                        <div className="categories">
-                            <ul>
-                                <li className="active">Все</li>
-                                <li>Мясные</li>
-                                <li>Вегетарианская</li>
-                                <li>Гриль</li>
-                                <li>Острые</li>
-                                <li>Закрытые</li>
-                            </ul>
-                        </div>
+                        <Categories items={ mCategories } />
                         <div className="sort">
                             <div className="sort__label">
                                 <svg

@@ -1,6 +1,6 @@
 import React from "react";
-import PizzaLogo from "../assets/img/pizza-logo.svg";
-import Cart from "./Cart";
+import PizzaLogo from "../../assets/img/pizza-logo.svg";
+import Card from "./Card";
 
 const Header = () => (
     <div className="header">
@@ -12,7 +12,7 @@ const Header = () => (
                     <p>самая вкусная пицца во вселенной</p>
                 </div>
             </div>
-            <Cart sum={1500} cnt={5} />
+            <Card sum={1500} cnt={5} />
         </div>
     </div>
 )
