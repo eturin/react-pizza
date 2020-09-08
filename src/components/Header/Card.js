@@ -1,10 +1,15 @@
 import React from "react";
 import Button from "../Button";
 
-const Card = ({sum,cnt}) =>{
+const Card = ({card,fcard}) =>{
+    let sum=0,cnt=0
+    for(let x of card){
+        sum+=x.sum
+        cnt+=x.cnt
+    }
     return (
         <Button className="button--cart">
-            <span>{sum} ₽</span>
+            <span>{ Math.round(sum*100)/100 } ₽</span>
             <div className="button__delimiter"></div>
             <svg
                 width="18"

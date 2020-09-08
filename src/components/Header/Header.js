@@ -1,8 +1,8 @@
 import React from "react";
 import PizzaLogo from "../../assets/img/pizza-logo.svg";
-import Card from "./Card";
 
-const Header = () => (
+
+const Header = (props) => (
     <div className="header">
         <div className="container">
             <div className="header__logo">
@@ -12,7 +12,7 @@ const Header = () => (
                     <p>самая вкусная пицца во вселенной</p>
                 </div>
             </div>
-            <Card sum={1500} cnt={5} />
+            { props.children }
         </div>
     </div>
 )

@@ -1,11 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import CN from "classnames"
 
-const Categories = ({items}) =>{
+const Categories = ({items,name,f}) =>{
     return (
         <div className="categories">
             <ul>
-                { items.map(x => <li key={x.id} className={CN({"active":x.active})}>{x.name}</li>)}
+                { items?.map((x,i) => <li key={`${x}_${i}`} onClick={()=>f(x)} className={CN({"active":x===name})}>{x}</li>)}
             </ul>
         </div>
     )

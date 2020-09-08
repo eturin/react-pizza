@@ -1,40 +1,41 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 
 import PizzaBlock from "./components/PizzaBlock";
 
 import Header from "./components/Header/Header";
 import Categories from "./components/Categories";
+import Card from "./components/Header/Card";
 
 let App = ()=> {
+    const [card,fcard] = useState([])
+    const items = ["Все","Мясные","Вегетарианская","Гриль","Острые","Закрытые"]
+    const [type,f] = useState(items && items[0])
     const path = "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/"
     const mCatalog = [
-        {id:1,img:`${path}b750f576-4a83-48e6-a283-5a8efb68c35d.jpg`,title:"Чизбургер-пицца",type:"тонкое",size:26,price:395,cnt:3},
-        {id:2,img:`${path}b750f576-4a83-48e6-a283-5a8efb68c35d.jpg`,title:"Времена года"   ,type:"традиционное",size:30,price:400,cnt:0},
-        {id:3,img:`${path}b750f576-4a83-48e6-a283-5a8efb68c35d.jpg`,title:"Мясная"         ,type:"тонкое",size:26,price:395,cnt:1},
-        {id:4,img:`${path}b750f576-4a83-48e6-a283-5a8efb68c35d.jpg`,title:"Морепродукты"   ,type:"традиционное",size:40,price:400,cnt:0},
-        {id:5,img:`${path}b750f576-4a83-48e6-a283-5a8efb68c35d.jpg`,title:"С котиками"     ,type:"тонкое",size:26,price:395,cnt:2},
-        {id:6,img:`${path}b750f576-4a83-48e6-a283-5a8efb68c35d.jpg`,title:"С мышатами"     ,type:"традиционное",size:26,price:400,cnt:0},
-        {id:7,img:`${path}b750f576-4a83-48e6-a283-5a8efb68c35d.jpg`,title:"Жучки"          ,type:"тонкое",size:26,price:395,cnt:4},
-        {id:8,img:`${path}b750f576-4a83-48e6-a283-5a8efb68c35d.jpg`,title:"Для гурманов"   ,type:"традиционное",size:40,price:400,cnt:0},
-        {id:9,img:`${path}b750f576-4a83-48e6-a283-5a8efb68c35d.jpg`,title:"Чебурек-пицца"  ,type:"традиционное",size:26,price:400,cnt:0},
+        {id:1,img:`${path}b750f576-4a83-48e6-a283-5a8efb68c35d.jpg`,title:"Чизбургер-пицца",price:395.01, type:["Мясные","Острые"]},
+        {id:2,img:`${path}b750f576-4a83-48e6-a283-5a8efb68c35d.jpg`,title:"Времена года"   ,price:400   , type:["Мясные"]},
+        {id:3,img:`${path}b750f576-4a83-48e6-a283-5a8efb68c35d.jpg`,title:"Мясная"         ,price:395   , type:["Мясные"]},
+        {id:4,img:`${path}b750f576-4a83-48e6-a283-5a8efb68c35d.jpg`,title:"Морепродукты"   ,price:400   , type:["Мясные"]},
+        {id:5,img:`${path}b750f576-4a83-48e6-a283-5a8efb68c35d.jpg`,title:"С котиками"     ,price:395   , type:["Мясные","Острые","Гриль"]},
+        {id:6,img:`${path}b750f576-4a83-48e6-a283-5a8efb68c35d.jpg`,title:"С мышатами"     ,price:400   , type:["Мясные"]},
+        {id:7,img:`${path}b750f576-4a83-48e6-a283-5a8efb68c35d.jpg`,title:"Жучки"          ,price:395   , type:["Вегетарианская"]},
+        {id:8,img:`${path}b750f576-4a83-48e6-a283-5a8efb68c35d.jpg`,title:"Для гурманов"   ,price:400   , type:["Мясные","Гриль"]},
+        {id:9,img:`${path}b750f576-4a83-48e6-a283-5a8efb68c35d.jpg`,title:"Чебурек-пицца"  ,price:400   , type:["Мясные","Закрытые"]},
     ]
 
-    const mPizza = mCatalog.map(x => (<PizzaBlock key={x.id} {...x} />))
-    const mCategories = [{id:1,name:"Все"},
-                         {id:2,name:"Мясные"},
-                         {id:3,name:"Вегетарианская"},
-                         {id:4,name:"Гриль"},
-                         {id:5,name:"Острые"},
-                         {id:6,name:"Закрытые",active:true}]
+    const mPizza = mCatalog.filter(x => type==="Все" || x.type.includes(type)).map(x => (<PizzaBlock key={x.id} card={card} fcard={fcard} {...x} />))
+
 
     return (
         <div className="wrapper">
-            <Header />
+            <Header>
+                <Card card={card} fcard={fcard} />
+            </Header>
             <div className="content">
                 <div className="container">
                     <div className="content__top">
-                        <Categories items={ mCategories } />
+                        <Categories items={ items } name={type} f={f}/>
                         <div className="sort">
                             <div className="sort__label">
                                 <svg
